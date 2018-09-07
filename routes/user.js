@@ -4,14 +4,12 @@ var router = express.Router();
 var $sql = require('../db/sqlMap');
 var conn = db.conn;
 var jsonWrite = function(res, ret) {
-
   if(typeof ret == 'undefined') {
     res.json({
       code: '0',
       msg: '操作失败'
     });
   } else {
-
     /*   ret.push({
       code: '1',
       msg: '操作成功',
@@ -50,58 +48,32 @@ router.get('/getUser', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  // console.info("到了1")
-  var sql = $sql.user.all;
-
-  // console.log("到了");
-/*  conn.query(sql, function(err, result) {
-    if (err) {
-      console.log(err);
-    }
-    if (result) {
-      jsonWrite(res, result);
-    }
-  })*/
+  console.info("访问到了、");
 });
 
 router.post('/getCarouserAll', (req, res) => {
   console.info("getCarouserAll")
   // var sql = $sql.user.getUserByid;
   db.selectAll($sql.user.getCarouserAll, function(err, result) {
-
     if (err) {
       console.log(err);
     }
     //console.info(result);
     if (result) {
-
       jsonWrite(res, result);
     }
   });
-  //jsonWrite(res, userMap.dataCarouser)
-  /*  conn.query(sql, function(err, result) {
-        if (err) {
-          console.log(err);
-        }
-        if (result) {
-          jsonWrite(res, result);
-        }
-      })*/
 });
 router.post('/getNavigation', (req, res) => {
-  console.info("到了1")
-  // var sql = $sql.user.getUserByid;
+  db.selectAll($sql.user.getNavigationAll, function(err, result) {
+    if (err) {
+      console.log(err);
+    }
+    //console.info(result);
 
+    jsonWrite(res, result);
+  });
   console.log("到了");
-  jsonWrite(res, userMap.dataNavigation)
-  /*  conn.query(sql, function(err, result) {
-          if (err) {
-            console.log(err);
-          }
-          if (result) {
-            jsonWrite(res, result);
-          }
-        })*/
 });
 
 router.get('/info', (req, res) => {
@@ -123,42 +95,78 @@ router.get('/info', (req, res) => {
 router.post('/addCarousel', (req, res) => {
   let formItem = req.body.formItem;
   delete formItem['id'];
-    console.info("addCarousel");
-  db.insertData('carouser', formItem,function(err, result){
-if(err) {
-    console.log(err);
-}
-      jsonWrite(res, result)
+  console.info("addCarousel");
+  db.insertData('carouser', formItem, function(err, result) {
+    if(err) {
+      console.log(err);
+    }
+    jsonWrite(res, result)
+  });
+});
+router.post('/addNavigation', (req, res) => {
+  let formItem = req.body.formItem;
+  delete formItem['id'];
+  console.info("addNavigation");
+  db.insertData('navigation', formItem, function(err, result) {
+    if(err) {
+      console.log(err);
+    }
+    jsonWrite(res, result)
+  });
+});
+router.post('/updateNavigation', (req, res) => {
+  let formItem = req.body.formItem;
+  console.info("updateNavigation");
+  let where = {
+    id: formItem.id
+  }
+  db.updateData('navigation', formItem, where, function(err, result) {
+    if(err) {
+      console.log(err);
+    }
+    jsonWrite(res, result)
   });
 });
 router.post('/updateCarousel', (req, res) => {
   let formItem = req.body.formItem;
-    console.info("updateCarousel");
-    let where ={
-        id:formItem.id
+  console.info("updateCarousel");
+  let where = {
+    id: formItem.id
+  }
+  db.updateData('carouser', formItem, where, function(err, result) {
+    if(err) {
+      console.log(err);
     }
-  db.updateData('carouser', formItem,where,function(err, result){
-if(err) {
-    console.log(err);
-
-}
-      jsonWrite(res, result)
+    jsonWrite(res, result)
   });
 });
 
 router.post('/deleteCarouser', (req, res) => {
   let id = req.body.id;
-    console.info("deleteCarouser");
+  console.info("deleteCarouser");
 
-    let where ={
-      id:id
+  let where = {
+    id: id
+  }
+  db.deleteData('carouser', where, function(err, result) {
+    if(err) {
+      console.log(err);
     }
-  db.deleteData('carouser', where,function(err, result){
-if(err) {
-    console.log(err);
+    jsonWrite(res, result)
+  });
+});
+router.post('/deleteNavigation', (req, res) => {
+  let id = req.body.id;
+  console.info("deleteNavigation");
 
-}
-      jsonWrite(res, result)
+  let where = {
+    id: id
+  }
+  db.deleteData('navigation', where, function(err, result) {
+    if(err) {
+      console.log(err);
+    }
+    jsonWrite(res, result)
   });
 });
 
