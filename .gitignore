@@ -7,3 +7,4 @@ selenium-debug.log
 .idea
 package-lock.json
 .project
+public/uploads
