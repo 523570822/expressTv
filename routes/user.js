@@ -64,17 +64,7 @@ router.post('/getCarouserAll', (req, res) => {
     }
   });
 });
-router.post('/getNavigation', (req, res) => {
-  db.selectAll($sql.user.getNavigationAll, function(err, result) {
-    if (err) {
-      console.log(err);
-    }
-    //console.info(result);
 
-    jsonWrite(res, result);
-  });
-  console.log("到了");
-});
 
 router.get('/info', (req, res) => {
   console.info("到了1")

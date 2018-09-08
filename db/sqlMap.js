@@ -6,8 +6,19 @@ var sqlMap = {
     all: 'select * from user',
     getUserByid: 'select * from user where id=1 ',
     getCarouserAll: 'select * from carouser ',
-      getNavigationAll: 'select * from navigation ',
+    getNavigationAll: 'select * from navigation '
+  },
+  navigation: {
+
+    all: 'select * from navigation'
+
+  },
+  category: {
+
+    all: 'select * from category'
+
   }
-}
+
+};
 
 module.exports = sqlMap;
