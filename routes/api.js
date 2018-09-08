@@ -13,23 +13,12 @@ var storage = multer.diskStorage({
     var fileFormat = (file.originalname).split(".");
     cb(null, Date.now() + "." + fileFormat[fileFormat.length - 1]);
   }
-})
+});
 
-var upload = multer({ storage: storage })
+var upload = multer({ storage: storage });
 
 // 连接数据库
 //var conn = mysql.createConnection(models.mysql);
-
-var jsonWrite = function(res, ret) {
-  if(typeof ret === 'undefined') {
-    res.json({
-      code: '1',
-      msg: '操作失败'
-    });
-  } else {
-    res.json(ret);
-  }
-};
 
 // 增加用户接口
 router.post('/addUser', (req, res) => {
@@ -53,9 +42,9 @@ router.get('/getUser', (req, res) => {
       console.log(err);
     }
     if (result) {
-      jsonWrite(res, result);
+      db.jsonWrite(res, result);
     }
-  })
+  });
 });
 router.get('/', (req, res) => {
   var sql = $sql.user.all;
@@ -64,9 +53,9 @@ router.get('/', (req, res) => {
       console.log(err);
     }
     if (result) {
-      jsonWrite(res, result);
+      db.jsonWrite(res, result);
     }
-  })
+  });
 });
 /*router.post('/uploadFile', upload.array('logo', 2), (req, res) => {
   // console.log("dddd");
@@ -83,15 +72,14 @@ console.indexOf(res);
 });*/
 
 router.post('/uploadFile', upload.array('logo', 2), (req, res) => {
-    // console.log("dddd");
-    // console.log(req.files[0]); // 上传的文件信息
-    let response22 = {
-        message: 'File uploaded successfully',
-        filename: req.files[0].filename,
-        path: req.files[0].path
-    };
+  // console.log("dddd");
+  // console.log(req.files[0]); // 上传的文件信息
+  let response22 = {
+    message: 'File uploaded successfully',
+    filename: req.files[0].filename,
+    path: req.files[0].path
+  };
 
-
-    res.end(JSON.stringify(response22));
+  res.end(JSON.stringify(response22));
 });
 module.exports = router;

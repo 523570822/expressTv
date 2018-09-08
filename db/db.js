@@ -64,6 +64,17 @@ let deleteData = function(table, where, callback) {
   var sql = "DELETE  FROM " + table + ' WHERE ' + _WHERE;
   connection.query(sql, callback);
 }
+let jsonWrite = function(res, ret) {
+    if(typeof ret === 'undefined') {
+        res.json({
+            code: '1',
+            msg: '操作失败'
+        });
+    } else {
+        res.json(ret);
+    }
+};
+exports.jsonWrite = jsonWrite;
 exports.conn = connection;
 exports.selectAll = selectAll;
 exports.insertData = insertData;

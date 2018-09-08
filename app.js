@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const user = require('./routes/user');
@@ -23,7 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
- //增加调试ip
+//增加调试ip
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/user', user);
@@ -40,11 +39,13 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-console.error(err);
-
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+  //如果不是404就跑出异常
+  if(err.message != 'Not Found') {
+    console.error(err);
+  }
 });
 
 module.exports = app;
