@@ -15,8 +15,9 @@ var sqlMap = {
   },
   category: {
 
-    all: 'select * from category'
-
+    all: 'select * from category',
+    getCategoryParent: "select * from category c where c.parent_id='0' ",
+    getCategoryById: "select * from category c where c.parent_id='?' ",
   }
 
 };

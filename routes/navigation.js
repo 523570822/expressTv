@@ -13,4 +13,30 @@ router.post('/getNavigation', (req, res) => {
   });
   console.log("到了");
 });
+
+router.post('/addNavigation', (req, res) => {
+  let formItem = req.body.formItem;
+  delete formItem['id'];
+  console.info("addNavigation");
+  db.insertData('navigation', formItem, function(err, result) {
+    if(err) {
+      console.log(err);
+    }
+    db.jsonWrite(res, result)
+  });
+});
+
+router.post('/updateNavigation', (req, res) => {
+  let formItem = req.body.formItem;
+  console.info("updateNavigation");
+  let where = {
+    id: formItem.id
+  }
+  db.updateData('navigation', formItem, where, function(err, result) {
+    if(err) {
+      console.log(err);
+    }
+    db.jsonWrite(res, result)
+  });
+});
 module.exports = router;

@@ -65,14 +65,14 @@ let deleteData = function(table, where, callback) {
   connection.query(sql, callback);
 }
 let jsonWrite = function(res, ret) {
-    if(typeof ret === 'undefined') {
-        res.json({
-            code: '1',
-            msg: '操作失败'
-        });
-    } else {
-        res.json(ret);
-    }
+  if(typeof ret === 'undefined') {
+    res.json({
+      code: '1',
+      msg: '操作失败'
+    });
+  } else {
+    res.json(ret);
+  }
 };
 exports.jsonWrite = jsonWrite;
 exports.conn = connection;
