@@ -1,8 +1,7 @@
-var db = require('../db/db');
+var db = require('../db/config');
 var express = require('express');
 var router = express.Router();
 var $sql = require('../db/sqlMap');
-var conn = db.conn;
 var jsonWrite = function(res, ret) {
   if(typeof ret == 'undefined') {
     res.json({

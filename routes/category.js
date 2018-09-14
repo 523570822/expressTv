@@ -1,5 +1,6 @@
-var db = require('../db/db');
+var db = require('../db/config');
 var express = require('express');
+var tree=require('../utils/treeUtil');
 var router = express.Router();
 var $sql = require('../db/sqlMap');
 router.post('/getCategoryAll', (req, res) => {
@@ -7,9 +8,22 @@ router.post('/getCategoryAll', (req, res) => {
     if (err) {
       console.log(err);
     }
-    //console.info(result);
-
     db.jsonWrite(res, result);
+  });
+  console.log("到了");
+});
+router.post('/getCategoryGroup', (req, res) => {
+  db.selectAll($sql.category.all, function(err, result) {
+    if (err) {
+      console.log(err);
+    }
+      let date;
+      let attributes = {
+          id: 'id',
+          parentId: 'parent_id',
+      };
+      date=tree.toTreeData(result,attributes);
+    db.jsonWrite(res, date);
   });
   console.log("到了");
 });
@@ -32,7 +46,7 @@ router.post('/getCategoryById', (req, res) => {
   let url = "";
 
   console.info(data);
-  db.conn.query($sql.category.getCategoryById, [data.id], function(err, result) {
+  db.query($sql.category.getCategoryById, [data.id], function(err, result) {
     if (err) {
       console.log(err);
     }

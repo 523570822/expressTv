@@ -1,11 +1,15 @@
+//暂时废弃
 const conn = require('../db/config');
 // 数据库连接配置
-const connection = conn();
+const connection = conn;
 // 查询所有数据
 let selectAll = (sql, callback) => {
   connection.query(sql, (err, result) => {
     if(err) {
+      console.log('错误信息-', err);
       console.log('错误信息-', err.sqlMessage);
+      console.log('错误信息-',result);
+
       let errNews = err.sqlMessage;
       callback(err, errNews);
     }else{
@@ -74,8 +78,8 @@ let jsonWrite = function(res, ret) {
     res.json(ret);
   }
 };
-exports.jsonWrite = jsonWrite;
 exports.conn = connection;
+exports.jsonWrite = jsonWrite;
 exports.selectAll = selectAll;
 exports.insertData = insertData;
 exports.deleteData = deleteData;
