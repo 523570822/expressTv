@@ -67,13 +67,61 @@ router.post('/deleteGoods', (req, res) => {
         db.jsonWrite(res, result)
     });
 });
-router.post('/getGoodsById', (req, res) => {
+router.get('/getGoodsById', (req, res) => {
     // console.info(res);
-    let data = req.body;
+    let data = req.query;
     let url = "";
 
     console.info(data);
     db.query($sql.goods.getGoodsById, [data.id], function(err, result) {
+        if (err) {
+            console.log(err);
+        }
+        //console.info(result);
+
+        db.jsonWrite(res, result);
+    });
+    console.log("到了");
+});
+router.get('/getGoodsBycategoryId', (req, res) => {
+    // console.info(res);
+    let data = req.query;
+    let url = "";
+
+    console.info(data);
+    db.query($sql.goods.getGoodsBycategoryId, [data.id], function(err, result) {
+        if (err) {
+            console.log(err);
+        }
+        //console.info(result);
+
+        db.jsonWrite(res, result);
+    });
+    console.log("到了");
+});
+router.get('/getGoodsBycategoryId', (req, res) => {
+    // console.info(res);
+    let data = req.query;
+    let url = "";
+
+    console.info(data);
+    db.query($sql.goods.getGoodsBycategoryId, [data.id], function(err, result) {
+        if (err) {
+            console.log(err);
+        }
+        //console.info(result);
+
+        db.jsonWrite(res, result);
+    });
+    console.log("到了");
+});
+router.get('/getGoodsByKeyword', (req, res) => {
+    // console.info(res);
+    let data = req.query;
+    let url = "";
+
+    console.info(data);
+    db.query($sql.goods.getGoodsByKeyword, [data.keyword], function(err, result) {
         if (err) {
             console.log(err);
         }

@@ -17,10 +17,12 @@ var sqlMap = {
 
     all: 'select * from category',
     getCategoryParent: "select * from category c where c.parent_id='0' ",
-    getCategoryById: "select * from category c where c.parent_id='?' ",
+    getCategoryById: "select * from category c where c.parent_id=? ",
   },
   goods: {
       getGoodsById: "select * from goods c where c.id=? ",
+      getGoodsBycategoryId: "select * from goods c where c.category_id=? ",
+      getGoodsByKeyword: "SELECT * FROM goods WHERE keyword= UPPER(?) ",
     all: 'select * from goods',
 
   }
