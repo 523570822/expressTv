@@ -21,20 +21,6 @@ var upload = multer({ storage: storage });
 //var conn = mysql.createConnection(models.mysql);
 
 // 增加用户接口
-router.post('/addUser', (req, res) => {
-/*  var sql = $sql.user.add;
-  var params = req.body;
-  console.log(params);
-   db.selectAll()
-  conn.query(sql, [params.username, params.age], function(err, result) {
-    if (err) {
-      console.log(err);
-    }
-    if (result) {
-      jsonWrite(res, result);
-    }
-  })*/
-});
 router.get('/getUser', (req, res) => {
   var sql = $sql.user.all;
   conn.query(sql, function(err, result) {
@@ -57,29 +43,26 @@ router.get('/', (req, res) => {
     }
   });
 });
-/*router.post('/uploadFile', upload.array('logo', 2), (req, res) => {
-  // console.log("dddd");
-  // console.log(req.files[0]); // 上传的文件信息
-  let response22 = {
-    message: 'File uploaded successfully',
-    filename: req.files[0].filename,
-    path: req.files[0].path
-  };
-console.indexOf(req);
-console.indexOf(res);
-
-  res.end(JSON.stringify(response22));
-});*/
-
 router.post('/uploadFile', upload.array('logo', 2), (req, res) => {
   // console.log("dddd");
   // console.log(req.files[0]); // 上传的文件信息
+
   let response22 = {
     message: 'File uploaded successfully',
     filename: req.files[0].filename,
     path: req.files[0].path
   };
+  let data={
+    url:response22.filename
+  }
+    db.insertData('image',data,function(err, result) {
+        if (err) {
+            console.log(err);
+        }
+        if (result) {
+            res.end(JSON.stringify(response22));
+        }
+    });
 
-  res.end(JSON.stringify(response22));
 });
 module.exports = router;
