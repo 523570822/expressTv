@@ -40,10 +40,11 @@ router.post('/getCategoryParent', (req, res) => {
   console.log("到了");
 });
 //根据父类查询子类
-router.get('/getCategoryById', (req, res) => {
+
+router.post('/getCategoryById', (req, res) => {
     console.info("dddd");
- // console.info(req);
-  let data = req.query;
+
+  let data = req.body;
   let url = "";
 
   console.info(data);
