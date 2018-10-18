@@ -55,14 +55,14 @@ router.post('/uploadFile', upload.array('logo', 2), (req, res) => {
   let data={
     url:response22.filename
   }
-    db.insertData('image',data,function(err, result) {
+/*    db.insertData('image',data,function(err, result) {
         if (err) {
             console.log(err);
         }
         if (result) {
             res.end(JSON.stringify(response22));
         }
-    });
-
+    });*/
+    res.end(JSON.stringify(response22));
 });
 module.exports = router;

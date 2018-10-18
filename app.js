@@ -12,6 +12,7 @@ const loginApi = require('./routes/login');
 const navigation = require('./routes/navigation');
 const category = require('./routes/category');
 const goods = require('./routes/goods');
+const image = require('./routes/image');
 
 var app = express();
 
@@ -34,6 +35,7 @@ app.use('/api', api);
 app.use('/api/navigation', navigation);
 app.use('/api/category', category);
 app.use('/api/goods', goods);
+app.use('/api/image', image);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

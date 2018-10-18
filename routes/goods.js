@@ -83,13 +83,13 @@ router.get('/getGoodsById', (req, res) => {
     });
     console.log("到了");
 });
-router.get('/getGoodsBycategoryId', (req, res) => {
-    // console.info(res);
-    let data = req.query;
+router.post('/getGoodsByCategoryId', (req, res) => {
+    console.info(res);
+    let data = req.body;
     let url = "";
 
     console.info(data);
-    db.query($sql.goods.getGoodsBycategoryId, [data.id], function(err, result) {
+    db.query($sql.goods.getGoodsByCategoryId, [data.id], function(err, result) {
         if (err) {
             console.log(err);
         }
@@ -99,22 +99,7 @@ router.get('/getGoodsBycategoryId', (req, res) => {
     });
     console.log("到了");
 });
-router.get('/getGoodsBycategoryId', (req, res) => {
-    // console.info(res);
-    let data = req.query;
-    let url = "";
 
-    console.info(data);
-    db.query($sql.goods.getGoodsBycategoryId, [data.id], function(err, result) {
-        if (err) {
-            console.log(err);
-        }
-        //console.info(result);
-
-        db.jsonWrite(res, result);
-    });
-    console.log("到了");
-});
 router.get('/getGoodsByKeyword', (req, res) => {
     // console.info(res);
     let data = req.query;

@@ -21,10 +21,12 @@ var sqlMap = {
   },
   goods: {
       getGoodsById: "select * from goods c where c.id=? ",
-      getGoodsBycategoryId: "select * from goods c where c.category_id=? ",
+      getGoodsByCategoryId: "select g.*,c.`name` as cname from goods g LEFT JOIN category c on g.category_id=c.id' where g.category_id=? ",
       getGoodsByKeyword: "SELECT * FROM goods WHERE keyword= UPPER(?) ",
-    all: 'select * from goods',
-
+    all: 'select g.*,c.`name` as cname from goods g LEFT JOIN category c on g.category_id=c.id',
+  },
+  image:{
+      getImageAll:"select * from image order by id"
   }
 
 };
