@@ -83,9 +83,9 @@ router.get('/getGoodsById', (req, res) => {
     });
     console.log("到了");
 });
-router.post('/getGoodsByCategoryId', (req, res) => {
+router.get('/getGoodsByCategoryId', (req, res) => {
     console.info(res);
-    let data = req.body;
+    let data = req.query;
     let url = "";
 
     console.info(data);

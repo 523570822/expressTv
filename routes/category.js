@@ -42,7 +42,7 @@ router.post('/getCategoryParent', (req, res) => {
 //根据父类查询子类
 
 router.post('/getCategoryById', (req, res) => {
-    console.info("dddd");
+    console.info("req");
 
   let data = req.body;
   let url = "";
@@ -58,7 +58,23 @@ router.post('/getCategoryById', (req, res) => {
   });
   console.log("到了");
 });
+router.get('/getCategoryByWeights', (req, res) => {
+    console.info("dddd");
 
+    let data = req.query;
+    let url = "";
+
+    console.info(data);
+    db.query($sql.category.getCategoryByWeights, [data.id], function(err, result) {
+        if (err) {
+            console.log(err);
+        }
+        //console.info(result);
+
+        db.jsonWrite(res, result);
+    });
+    console.log("到了");
+});
 router.post('/deleteCategory', (req, res) => {
   let id = req.body.id;
   console.info("deleteCategory");
