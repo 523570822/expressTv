@@ -63,6 +63,7 @@ router.post('/uploadFile', upload.array('logo', 2), (req, res) => {
             res.end(JSON.stringify(response22));
         }
     });*/
+   //console.info(data);
     res.end(JSON.stringify(response22));
 });
 module.exports = router;

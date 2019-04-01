@@ -11,7 +11,7 @@ router.post('/getNavigation', (req, res) => {
 
     db.jsonWrite(res, result);
   });
-  console.log("到了");
+ // console.log("到了");
 });
 
 router.post('/addNavigation', (req, res) => {

@@ -88,7 +88,7 @@ router.get('/getGoodsByCategoryId', (req, res) => {
     let data = req.query;
     let url = "";
 
-    console.info(data);
+    //console.info(data);
     db.query($sql.goods.getGoodsByCategoryId, [data.id], function(err, result) {
         if (err) {
             console.log(err);
@@ -105,7 +105,7 @@ router.get('/getGoodsByKeyword', (req, res) => {
     let data = req.query;
     let url = "";
 
-    console.info(data);
+    //console.info(data);
     db.query($sql.goods.getGoodsByKeyword, [data.keyword], function(err, result) {
         if (err) {
             console.log(err);

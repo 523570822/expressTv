@@ -2,7 +2,7 @@
 node_modules/
 uploads/
 dist/
-
+public/static/
 npm-debug.log
 selenium-debug.log
 .idea

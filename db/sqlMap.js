@@ -5,6 +5,7 @@ var sqlMap = {
     add: 'insert into user(id, name, age) values (0, ?, ?)',
     all: 'select * from user',
     getUserByid: 'select * from user where id=1 ',
+      loginbyemail:'select * from user where name=? and password=?',
     getCarouserAll: 'select * from carouser order by id',
     getNavigationAll: 'select * from navigation '
   },

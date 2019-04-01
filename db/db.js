@@ -53,7 +53,7 @@ let updateData = function(table, sets, where, callback) {
   // UPDATE user SET Password='321' WHERE UserId=12
   //update table set username='admin2',age='55'   where id="5";
   var sql = "UPDATE " + table + ' SET ' + _SETS + ' WHERE ' + _WHERE;
-  console.log(sql);
+ // console.log(sql);
   connection.query(sql, callback);
 }
 
