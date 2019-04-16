@@ -20,7 +20,7 @@ var num=0;
    /* var pool  = mysql.createPool({
         connectionLimit : 10,
         host            : '192.168.1.222',
-        user            : 'root',
+        user            : 'root',loginbyemail
         password    : 'root',
         database: 'test',
         port: '3306'
@@ -63,6 +63,7 @@ var num=0;
                 var fields = '';
                 var values = '';
                 for(var k in options) {
+
                     fields += k + ',';
                     values = values + "'" + options[k] + "',"
                 }
@@ -138,7 +139,7 @@ let jsonWrite = function(res, ret) {
         });
     } else {
         console.info("==================");
-        //console.info(ret);
+        console.info(ret);
         res.json(ret);
     }
 };

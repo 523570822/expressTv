@@ -4,11 +4,17 @@ var router = express.Router();
 var $sql = require('../db/sqlMap');
 var jsonWrite = function(res, ret) {
   if(typeof ret == 'undefined') {
+     console.info("ccccccccccccc");
+     // console.info(res);
+      let code=0;
     res.json({
-      code: '0',
+      code: 'code',
       msg: '操作失败'
     });
   } else {
+
+
+
     /*   ret.push({
       code: '1',
       msg: '操作成功',
@@ -16,7 +22,24 @@ var jsonWrite = function(res, ret) {
     res.json(ret);
   }
 };
-
+var jsonWrite1 = function(res, ret,errno) {
+    if(typeof ret == 'undefined') {
+         console.info("ddddddddddddddddd");
+         console.info(errno);
+        let code=0;
+        res.json({
+            code: code,
+            errno:errno,
+            msg: '操作失败'
+        });
+    } else {
+        /*   ret.push({
+          code: '1',
+          msg: '操作成功',
+        })*/
+        res.json(ret);
+    }
+};
 // 增加用户接口
 router.post('/addUser', (req, res) => {
   var sql = $sql.user.add;
@@ -59,7 +82,7 @@ router.post('/getCarouserAll', (req, res) => {
     }
     //console.info(result);
     if (result) {
-      jsonWrite(res, result);
+        jsonWrite1(res, result);
     }
   });
 });
@@ -92,16 +115,103 @@ router.post('/addCarousel', (req, res) => {
     jsonWrite(res, result)
   });
 });
-router.post('/addNavigation', (req, res) => {
-  let formItem = req.body.formItem;
-  delete formItem['id'];
-  console.info("addNavigation");
-  db.insertData('navigation', formItem, function(err, result) {
-    if(err) {
-      console.log(err);
+router.post('/getVericationAll', (req, res) => {
+    console.info("getVericationAll")
+    // var sql = $sql.user.getUserByid;
+    db.selectAll($sql.user.getVericationAll, function(err, result) {
+        if (err) {
+            console.log(err);
+        }
+        //console.info(result);
+        if (result) {
+            jsonWrite(res, result);
+        }
+    });
+});
+router.post('/addVerication', (req, res) => {
+    let data = req.body.formItem;
+    let formItem = req.body.formItem.formItem;
+    delete formItem['id'];
+    formItem['beginDate']=data.create;
+    console.info(data);
+    console.info(req.body.formItem.formItem);
+
+    db.insertData('verification', formItem, function(err, result) {
+        if(err) {
+            console.log(err);
+            jsonWrite1(res, result,err.errno);
+        }else{
+            jsonWrite1(res, result,0);
+        }
+
+    });
+});
+router.post('/updateVerication', (req, res) => {
+    let data = req.body.formItem;
+    let formItem = req.body.formItem.formItem;
+    formItem['beginDate']=data.create;
+    console.info("updateVerication");
+    let where = {
+        id: formItem.id
     }
-    jsonWrite(res, result)
-  });
+    db.updateData('verification', formItem, where, function(err, result) {
+        if(err) {
+            console.log(err);
+            jsonWrite1(res, result,err.errno);
+        }else{
+            jsonWrite1(res, result,0);
+        }
+
+    });
+});
+router.post('/updateVerication', (req, res) => {
+    let data = req.body.formItem;
+    let formItem = req.body.formItem.formItem;
+    formItem['beginDate']=data.create;
+    console.info("updateVerication");
+    let where = {
+        id: formItem.id
+    }
+    db.updateData('verification', formItem, where, function(err, result) {
+        if(err) {
+            console.log(err);
+        }
+        jsonWrite(res, result)
+    });
+});
+router.post('/getVericationBylevel', (req, res) => {
+    console.info("getVericationBylevel");
+
+    let data = req.body;
+    let url = "";
+
+    console.info(data);
+    db.query($sql.user.getVericationByLevel, [data.level], function(err, result) {
+        if (err) {
+            console.log(err);
+        }
+        //console.info(result);
+
+        db.jsonWrite(res, result);
+    });
+    console.log("到了");
+});
+router.get('/getVericationByCode', (req, res) => {
+    console.info("getVericationByCode");
+    let data = req.query;
+
+    let url = "";
+
+   //      console.info(req);
+    db.query($sql.user.getVericationByCode, [data.code], function(err, result) {
+        if (err) {
+            console.log(err);
+        }
+        //console.info(result);
+
+        db.jsonWrite(res, result);
+    });
+    console.log("到了");
 });
 router.post('/updateNavigation', (req, res) => {
   let formItem = req.body.formItem;

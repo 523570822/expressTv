@@ -7,6 +7,9 @@ var sqlMap = {
     getUserByid: 'select * from user where id=1 ',
       loginbyemail:'select * from user where name=? and password=?',
     getCarouserAll: 'select * from carouser order by id',
+      getVericationAll: 'select * from verification order by id',
+      getVericationByLevel: "select * from verification c where c.level=? ",
+      getVericationByCode: "select * from verification c where c.verificationCode=? ",
     getNavigationAll: 'select * from navigation '
   },
   navigation: {

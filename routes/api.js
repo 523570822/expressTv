@@ -7,7 +7,8 @@ var multer = require('multer');
 var conn = db.conn;
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/uploads');
+
+    cb(null, '../public/uploads');
   },
   filename: function (req, file, cb) {
     var fileFormat = (file.originalname).split(".");
@@ -52,6 +53,8 @@ router.post('/uploadFile', upload.array('logo', 2), (req, res) => {
     filename: req.files[0].filename,
     path: req.files[0].path
   };
+  console.info(  "上传完成");
+  console.info(  response22);
   let data={
     url:response22.filename
   }

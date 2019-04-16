@@ -24,7 +24,7 @@ var admin = {
 // 增加用户接口
 router.post('/loginbyemail', (req, res) => {
     let data = req.body;
-    //console.info(data);
+    console.info(data);
     db.query($sql.user.loginbyemail, [data.email,data.password], function(err, result) {
         if (err) {
             console.log(err);
