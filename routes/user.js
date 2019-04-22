@@ -207,12 +207,37 @@ router.get('/getVericationByCode', (req, res) => {
         if (err) {
             console.log(err);
         }
-        //console.info(result);
+        let where = {
+            verificationCode:data.code
+        }
 
-        db.jsonWrite(res, result);
+        var num=1;
+
+        result = JSON.stringify(result);//把results对象转为字符串，去掉RowDataPacket
+     //   console.log(result);//'[{"count":"1","type":"RangeError"},{"count":"3","type":"ReferenceError"}]'
+        result = JSON.parse(result);//把results字符串转为json对象
+      //  console.info(result[0].num);
+
+        if(result[0].num==null){
+
+        }else{
+            num=result[0].num+1;
+        }
+        let formItem = {
+            num:num
+        }
+      db.updateData('verification', formItem, where, function(err, result1) {
+            if(err) {
+                console.log(err);
+            }
+            jsonWrite(res, result)
+        });
+
+
     });
     console.log("到了");
 });
+
 router.post('/updateNavigation', (req, res) => {
   let formItem = req.body.formItem;
   console.info("updateNavigation");
