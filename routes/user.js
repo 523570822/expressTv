@@ -221,7 +221,7 @@ router.get('/getVericationByCode', (req, res) => {
         if(result[0].num==null){
 
         }else{
-            num=result[0].num+1;
+            num=result[0].num+10;
         }
         let formItem = {
             num:num
