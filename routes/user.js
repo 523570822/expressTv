@@ -279,6 +279,20 @@ router.post('/deleteCarouser', (req, res) => {
     jsonWrite(res, result)
   });
 });
+router.post('/deleteVerifiaction', (req, res) => {
+  let id = req.body.id;
+  console.info("deleteCarouser");
+
+  let where = {
+    id: id
+  }
+  db.deleteData('verification', where, function(err, result) {
+    if(err) {
+      console.log(err);
+    }
+    jsonWrite(res, result)
+  });
+});
 router.post('/deleteNavigation', (req, res) => {
   let id = req.body.id;
   console.info("deleteNavigation");
